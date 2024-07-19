@@ -12,6 +12,14 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script defer src='calendar.js'></script>
 </head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SL5SX0BZWZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+
+   gtag('config', 'G-SL5SX0BZWZ');
+</script>
 <body>
     <form>
         <p>Need something to celebrate?</p>
@@ -52,7 +60,6 @@
             <button id='today-button'>Use today's date!</button>
         </div>
         <div id="holiday-container"></div>
-
     </form>
     <ul id="holidayList" class="holiday-list"></ul>
 
