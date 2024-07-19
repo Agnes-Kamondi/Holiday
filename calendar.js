@@ -10,6 +10,8 @@ userYear.value = today.getFullYear();
 
 const $cardContainer = $('#card-container');
 
+$cardContainer.hide();
+
 let cardCount = 0;
 let display = false;
 let countryList = [];
@@ -28,6 +30,7 @@ function handleGetCountries() {
         (data) => {
             countryList = data.response.countries;
             countryDropdown();
+
             // Automatically fetch all holidays for Kenya after populating the dropdown
             const kenyaOption = countryList.find(country => country.country_name === 'Kenya');
             if (kenyaOption) {
@@ -57,7 +60,6 @@ function countryDropdown() {
 function handleGetHolidays(evt) {
     if (evt) evt.preventDefault();
 
-    // Validate inputs
     if (userCountry.value === 'Please Choose a Country') {
         alert('You must choose a country first!')
         return;
@@ -66,7 +68,7 @@ function handleGetHolidays(evt) {
         return;
     }
 
-    // Fetch holidays for the entire year
+
     $.ajax({
         url: `https://calendarific.com/api/v2/holidays?&api_key=${k}&country=${userCountry.value}&year=${userYear.value}`
     }).then(
@@ -109,12 +111,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Fetch and display holidays for a default country (e.g., US)
     fetchHolidays('US');
 });
 
 function renderHoliday() {
-    removeCards(); // Clear existing cards before rendering new ones
+    removeCards(); 
     holidayList.forEach(holiday => {
         createCard();
 
@@ -128,6 +129,8 @@ function renderHoliday() {
         $cardName.text(holiday.name);
         $cardDesc.text(holiday.description);
     });
+
+    $cardContainer.show();
     display = true;
 }
 
@@ -151,6 +154,7 @@ function removeCards() {
 function clearHolidays(evt) {
     evt.preventDefault();
     removeCards();
+    $cardContainer.hide();
 }
 
 function nameFromIso(iso) {
